@@ -169,12 +169,12 @@ div.spacer{
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-up-open, .icon-down-open {
+.icon-up-dir, .icon-down-dir {
     font-size: 20px;
 }
 
-.arrowbox-red-up .icon-up-open.active:before,
-.arrowbox-green-up .icon-down-open.active:before
+.arrowbox-red-up .icon-up-dir.active:before,
+.arrowbox-green-up .icon-down-dir.active:before
 {
     background: linear-gradient(to right, #ff0015 20%, #b00f00 40%, #830004 60%, #b00f00 80%);
     background-size: 200% auto;
@@ -183,8 +183,8 @@ div.spacer{
     -webkit-animation: hue 1s infinite linear;
 }
 
-.arrowbox-red-up .icon-down-open.active:before,
-.arrowbox-green-up .icon-up-open.active:before
+.arrowbox-red-up .icon-down-dir.active:before,
+.arrowbox-green-up .icon-up-dir.active:before
 {
     background: linear-gradient(to right, #edff0b 20%, #a8b70a 40%, #6e7c09 60%, #c4d50a 80%);
     background-size: 200% auto;
@@ -199,12 +199,12 @@ div.spacer{
 
 [class*="arrowbox-"] .arrows {
     margin: 0 auto;
-    /*width: 31px;*/
-    width: 36px;
+    width: 21px;
 }
 
-[class*="arrowbox-"] .arrows i:last-child{
-    /*margin-left: -5px;*/
+[class*="arrowbox-"] .arrows i:last-child {
+    margin-left: -5px;
+    color: #3e3e58;
 }
 
 .arrow-percent {
@@ -218,6 +218,7 @@ div.spacer{
 @-webkit-keyframes hue {
     to {
         background-position: 200% center;
+        /*background-position: center 200% ;*/
     }
 }
 
