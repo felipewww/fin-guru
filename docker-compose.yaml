@@ -1,18 +1,31 @@
 version: '3'
 services:
-  node-express-core:
-    build: ./Dockerfiles/node-express-core
-    image: node:9
+  node-front:
+#    image: node:9
+    build: ./Dockerfiles/node-auth
     stdin_open: true
     tty: true
     ports:
-      - "3000:3000"
-    volumes:
-      - ~/Projects/squadguru/node-express-core:/app
+      - 80:80
     command:
       - /entrypoint/entrypoint.sh
+    volumes:
+      - ./node-auth:/app
     links:
       - db
+#  node-express-core:
+#    build: ./Dockerfiles/node-express-core
+#    image: node:9
+#    stdin_open: true
+#    tty: true
+#    ports:
+#      - "3000:3000"
+#    volumes:
+#      - ~/Projects/squadguru/node-express-core:/app
+#    command:
+#      - /entrypoint/entrypoint.sh
+#    links:
+#      - db
   laravel-dbm:
     build: ./Dockerfiles/laravel-dbm
     image: php7.2-apache:dbm
@@ -28,8 +41,9 @@ services:
     image: mysql:5.6
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    volumes:
+      - ./mysql-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: example
     ports:
-      - "3306:3306"
-
+      - 3306:3306

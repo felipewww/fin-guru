@@ -1,3 +1,2 @@
 .idea/*
-node-express-core/node_modules
-node-express-core/dist
+mysql-data/
