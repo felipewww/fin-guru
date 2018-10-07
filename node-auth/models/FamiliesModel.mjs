@@ -39,4 +39,13 @@ export default class FamiliesModel extends Model {
             }
         })
     }
+
+    findByUsername(username)
+    {
+        return this.model.findOne({
+            where: {
+                username: username
+            }
+        })
+    }
 }

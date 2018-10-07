@@ -1,119 +1,61 @@
-import crypto from 'crypto';
-import server from './app';
-import jwt from "jsonwebtoken";
-import bcrypt from 'bcrypt';
+import * as app from './app';
 
-import Responser from './Responser';
+import FamilyController from './controllers/FamilyController';
+import UserController from './controllers/UserController';
+import Validator from './controllers/Validator';
 
-import FamiliesModel from './models/FamiliesModel';
+import Debugger from './core/Debugger';
+
+
+// import JWT from "jsonwebtoken";
+// const jwt = JWT;
+
+// const _debugger = new Debugger();
+global._debugger = new Debugger();
+// global.Debugger = new Debugger();
 
 export default class Routes {
     constructor()
     {
-        this.Responser = new Responser();
-        this.FamiliesModel = new FamiliesModel();
         this.setRoutes();
     }
 
     setRoutes()
     {
-        // console.log(SS)
-        server.get('/teste', function (req, res) {
-            res.send('Opa!');
+        let Router = app.default.server;
+
+        Router.put('/user', async(req, res, next) => {
+            let responser = await new UserController().register(req.body);
+            console.log(responser);
+            res.send(responser.status, responser.getResponse());
         });
 
-        server.post('/login', (req, res, next) => {
-            return this.login(req, res, next);
+        Router.post('/user', async(req, res, next) => {
+            let responser = await new UserController().login(req.body);
+            res.send(responser.status, responser.getResponse());
         });
 
-        server.post('/validate',  (req, res, next) => {
-            return this.validate(req, res, next)
+        Router.put('/family', async(req, res, next) => {
+            // return await new FamilyController().register();
+            let responser = await new FamilyController().register(req.body);
+            res.send(responser.status, responser.getResponse())
         });
 
-        server.put('/family', async(req, res, next) => {
+        Router.post('/family', async(req, res, next) => {
+            // return await new FamilyController().register();
+            let responser = await new FamilyController().login(req.body);
+            res.send(responser.status, responser.getResponse())
+        });
 
-            try{
-                // let family = await this.putFamily(req, res, next);
-                let password = await this._generatePassword(req.body.password);
-
-                let family = await this.FamiliesModel.model.create({
-                    name: req.body.name,
-                    username: req.body.username,
-                    password: password,
-                });
-
-                this.Responser.setSuccess({
-                    id: family.id
-                });
-            }catch (e) {
-                this.Responser.setError(1, e);
-            }
-
-            return res.send(this.Responser.status, this.Responser.getResponse());
-
+        Router.post('/validate',  (req, res, next) => {
+            let responser = new Validator().validate(req.body);
+            res.send(responser.status, responser.getResponse())
+            // return this.validate(req, res, next)
         });
     }
 
-    putUser(req, res, next)
+    executer(method)
     {
 
-    }
-
-    async _generatePassword(passwordSent)
-    {
-        return new Promise((resolve, reject) => {
-            const saltRounds = 10;
-            bcrypt.genSalt(saltRounds, function(err, salt) {
-                bcrypt.hash(passwordSent, salt, function(err, hash) {
-                    resolve(hash);
-                });
-            });
-        })
-    }
-
-    async login(req, res, next)
-    {
-        let family = await this.FamiliesModel.findById(1);
-        console.log("family.id".green);
-        console.log(family.id);
-        console.log(family);
-
-
-        let encrypt = crypto.createCipher('aes-128-cbc', process.env.APP_SECRET_RAW);
-        encrypt.update(req.body.id, 'utf8', 'hex');
-        encrypt.update('|'+req.body.familyId, 'utf8', 'hex');
-        let cryptStr = encrypt.final('hex');
-
-        let token = jwt.sign({
-            data: cryptStr
-        }, process.env.APP_SECRET_HASH);
-
-
-        res.send({ token: token });
-    }
-
-    validate(req, res, next)
-    {
-        let token = req.body.token;
-
-        try {
-            let decoded = jwt.verify(token, process.env.APP_SECRET_HASH);
-
-            // var decrypt = crypto.createDecipher('aes-128-cbc', process.env.APP_SECRET_RAW);
-            var decrypt = crypto.createDecipher('aes-128-cbc', 'wrong');
-            decrypt.update(decoded.data, 'hex', 'utf8');
-            let decryptData = decrypt.final('utf8').split("|");
-
-
-            let userId = parseInt(decryptData[0]);
-            let familyId = parseInt(decryptData[1]);
-
-            this.Responser.setSuccess([userId, familyId]);
-
-        } catch(err) {
-            this.Responser.setError(1000, err);
-        }
-
-        return res.send(this.Responser.status, this.Responser.getResponse());
     }
 }

@@ -2,10 +2,10 @@ import DatabaseSettings from '../core/db/DatabaseSettings';
 import Model from '../core/db/Model';
 import Sequelize from 'sequelize';
 
-export default class FamiliesModel extends Model {
+export default class UsersModel extends Model {
     static settings(){
         return new DatabaseSettings(
-            'families',
+            'users',
             {
                 name: {
                     type: Sequelize.STRING
@@ -26,7 +26,6 @@ export default class FamiliesModel extends Model {
             {
                 createdAt   : 'created_at',
                 updatedAt   : 'updated_at',
-                // timestamps: false
             }
         );
     };
@@ -34,14 +33,15 @@ export default class FamiliesModel extends Model {
     constructor()
     {
         super();
-        this.model = this.Definer(FamiliesModel.settings());
+        this.model = this.Definer(UsersModel.settings());
     }
 
-    findById(id)
+    findById(id, familyId)
     {
         return this.model.findOne({
             where: {
-                id: id
+                id: id,
+                family_id: familyId
             }
         })
     }

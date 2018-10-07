@@ -19,6 +19,12 @@ export default class Responser {
     {
         let errors = {
             1: { message: 'Something went wrong.', httpCode: 400 },
+
+            2: { message: 'Family not found.', httpCode: 403 },
+            3: { message: 'Invalid Password.', httpCode: 403 },
+
+            13: { message: "Danger error. This shouldn't have happened!", httpCode: 403 },
+
             1000: { message: 'Invalid Token.', httpCode: 403 }
         };
 
@@ -53,7 +59,7 @@ export default class Responser {
     logger(err)
     {
         let tag = process.env.APP_ENV.yellow+ " " +"Error".bgRed.white;
-        console.log(tag);
+        console.log(tag);+
         console.log(err.message);
     }
 }
