@@ -1,6 +1,6 @@
 FROM node:9
 
-WORKDIR /app
+WORKDIR /node-auth
 
 COPY ./entrypoint.sh /entrypoint/entrypoint.sh
 RUN ["chmod", "+x", "/entrypoint/entrypoint.sh"]

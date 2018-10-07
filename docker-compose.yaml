@@ -1,31 +1,30 @@
 version: '3'
 services:
-  node-front:
-#    image: node:9
+  node-auth:
     build: ./Dockerfiles/node-auth
     stdin_open: true
     tty: true
     ports:
-      - 80:80
+      - 81:81
     command:
       - /entrypoint/entrypoint.sh
     volumes:
-      - ./node-auth:/app
+      - ./node-auth:/node-auth
     links:
       - db
-#  node-express-core:
-#    build: ./Dockerfiles/node-express-core
+  node-front:
+    build: ./Dockerfiles/node-front
 #    image: node:9
-#    stdin_open: true
-#    tty: true
-#    ports:
-#      - "3000:3000"
-#    volumes:
-#      - ~/Projects/squadguru/node-express-core:/app
-#    command:
-#      - /entrypoint/entrypoint.sh
-#    links:
-#      - db
+    stdin_open: true
+    tty: true
+    ports:
+      - 80:80
+    volumes:
+      - ./node-front:/node-front
+    command:
+      - /entrypoint/entrypoint.sh
+    links:
+      - node-auth
   laravel-dbm:
     build: ./Dockerfiles/laravel-dbm
     image: php7.2-apache:dbm
