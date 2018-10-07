@@ -1,2 +1,23 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            url: 'http://localhost:81/login',
+            success: function (data) {
+                console.log("succ");
+                console.log(data);
+            },
+            error: function (err) {
+                console.log("err");
+                console.log(err);
+            }
+        })
+    </script>
+</head>
+<body>
+    <h1>{{title}}</h1>
+    <p>Welcome to {{title}}</p>
+</body>
+</html>
+
