@@ -18,6 +18,7 @@ export default class Responser {
     setError(errorCoode, err)
     {
         let errors = {
+            1: { message: 'Something went wrong.', httpCode: 400 },
             1000: { message: 'Invalid Token.', httpCode: 403 }
         };
 
@@ -28,7 +29,8 @@ export default class Responser {
 
         //Show error only in development mode.
         if (process.env.APP_ENV === 'dev') {
-            message.err = err.message;
+            message.err = err;
+            message.errMessage = err.message;
             this.logger(err);
         } else {
             this.logger(err);

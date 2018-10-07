@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UsersSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        //
+//        DB::table('users')->insert([
+//            'name' => 'Rosa Barreiros',
+//            'lastname' => 'rosabarreiros',
+//            'password' => '$2b$10$aTcKyk.dm9VlmLArgfAzRexBFhqkrsnlp3Wg.DQbUoEANVywbZtgW', //secret-password
+//            ''
+//        ]);
     }
 }

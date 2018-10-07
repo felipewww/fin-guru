@@ -10,12 +10,18 @@ export default class FamiliesModel extends Model {
                 name: {
                     type: Sequelize.STRING
                 },
-                username: {
+                lastname: {
+                    type: Sequelize.STRING
+                },
+                nickname: {
                     type: Sequelize.STRING
                 },
                 password: {
                     type: Sequelize.STRING
                 },
+                family_id: {
+                    type: Sequelize.INTEGER
+                }
             },
             {
                 createdAt   : 'created_at',

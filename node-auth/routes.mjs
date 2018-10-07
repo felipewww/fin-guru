@@ -1,13 +1,17 @@
 import crypto from 'crypto';
 import server from './app';
 import jwt from "jsonwebtoken";
+import bcrypt from 'bcrypt';
 
 import Responser from './Responser';
+
+import FamiliesModel from './models/FamiliesModel';
 
 export default class Routes {
     constructor()
     {
         this.Responser = new Responser();
+        this.FamiliesModel = new FamiliesModel();
         this.setRoutes();
     }
 
@@ -18,16 +22,63 @@ export default class Routes {
             res.send('Opa!');
         });
 
-        server.post('/login', this.login);
+        server.post('/login', (req, res, next) => {
+            return this.login(req, res, next);
+        });
 
         server.post('/validate',  (req, res, next) => {
             return this.validate(req, res, next)
-        })
-        // server.post('/validate',  this.validate);
+        });
+
+        server.put('/family', async(req, res, next) => {
+
+            try{
+                // let family = await this.putFamily(req, res, next);
+                let password = await this._generatePassword(req.body.password);
+
+                let family = await this.FamiliesModel.model.create({
+                    name: req.body.name,
+                    username: req.body.username,
+                    password: password,
+                });
+
+                this.Responser.setSuccess({
+                    id: family.id
+                });
+            }catch (e) {
+                this.Responser.setError(1, e);
+            }
+
+            return res.send(this.Responser.status, this.Responser.getResponse());
+
+        });
     }
 
-    login(req, res, next)
+    putUser(req, res, next)
     {
+
+    }
+
+    async _generatePassword(passwordSent)
+    {
+        return new Promise((resolve, reject) => {
+            const saltRounds = 10;
+            bcrypt.genSalt(saltRounds, function(err, salt) {
+                bcrypt.hash(passwordSent, salt, function(err, hash) {
+                    resolve(hash);
+                });
+            });
+        })
+    }
+
+    async login(req, res, next)
+    {
+        let family = await this.FamiliesModel.findById(1);
+        console.log("family.id".green);
+        console.log(family.id);
+        console.log(family);
+
+
         let encrypt = crypto.createCipher('aes-128-cbc', process.env.APP_SECRET_RAW);
         encrypt.update(req.body.id, 'utf8', 'hex');
         encrypt.update('|'+req.body.familyId, 'utf8', 'hex');

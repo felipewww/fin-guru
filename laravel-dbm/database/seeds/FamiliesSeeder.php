@@ -15,7 +15,7 @@ class FamiliesSeeder extends Seeder
         DB::table('families')->insert([
             'name' => 'Rosa Barreiros',
             'username' => 'rosabarreiros',
-            'password' => 'secret',
+            'password' => '$2b$10$aTcKyk.dm9VlmLArgfAzRexBFhqkrsnlp3Wg.DQbUoEANVywbZtgW', //secret-password
         ]);
     }
 }

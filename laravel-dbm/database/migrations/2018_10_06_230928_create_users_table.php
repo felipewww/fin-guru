@@ -15,7 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name'); //Felipe
+            $table->string('lastname'); //Barreiros
+            $table->string('nickname'); //Pai
+            $table->string('password'); //secret-password
+            $table->integer('family_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('family_id')
+                ->references('id')
+                ->on('families')
+                ->onDelete('cascade');
         });
     }
 
