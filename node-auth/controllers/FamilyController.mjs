@@ -1,6 +1,7 @@
 import Controller from '../core/Controller';
 
 import FamiliesModel from '../models/FamiliesModel';
+import UsersModel from '../models/UsersModel';
 // import jwt from "jsonwebtoken";
 import Cryptor from '../core/Cryptor';
 
@@ -27,7 +28,8 @@ export default class FamilyController extends Controller{
             });
 
             this.Responser.setSuccess({
-                token: Cryptor.generateFamilyToken(family.id)
+                token: Cryptor.generateFamilyToken(family.id),
+                familyUsers: {}
             });
 
         }catch (e) {
@@ -54,8 +56,12 @@ export default class FamilyController extends Controller{
                 return this.Responser;
             }
 
+            let usersModel = new UsersModel();
+            let users = await usersModel.findByFamily(family.id);
+
             this.Responser.setSuccess({
-                token: Cryptor.generateFamilyToken(family.id)
+                token: Cryptor.generateFamilyToken(family.id),
+                users: users
             });
         }catch (e) {
             _debugger.error(e);

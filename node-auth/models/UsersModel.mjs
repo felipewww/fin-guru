@@ -45,4 +45,16 @@ export default class UsersModel extends Model {
             }
         })
     }
+
+    findByFamily(familyId)
+    {
+        this.model.attributes.exclude = ['password'];
+
+        return this.model.findAll({
+            where: {
+                family_id: familyId
+            },
+            attributes: ['id', 'name', 'lastname', 'nickname']
+        })
+    }
 }
