@@ -1,8 +1,10 @@
 FROM node:9
 
-WORKDIR /node-auth
+WORKDIR /squad/node-auth
 
-COPY ./entrypoint.sh /entrypoint/entrypoint.sh
-RUN ["chmod", "+x", "/entrypoint/entrypoint.sh"]
+RUN apt-get update && apt-get install nano -y
 
-EXPOSE 3000
+COPY entrypoint.sh /entrypoints/squad/node-auth/entrypoint.sh
+RUN ["chmod", "+x", "/entrypoints/squad/node-auth/entrypoint.sh"]
+
+#EXPOSE 3000

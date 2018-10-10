@@ -1,6 +1,8 @@
 FROM node:9
 
-WORKDIR /node-front
+WORKDIR /squad/node-front
 
-COPY ./entrypoint.sh /entrypoint/entrypoint.sh
-RUN ["chmod", "+x", "/entrypoint/entrypoint.sh"]
+RUN apt-get update && apt-get install nano -y
+
+COPY entrypoint.sh /entrypoints/squad/node-front/entrypoint.sh
+RUN ["chmod", "+x", "/entrypoints/squad/node-front/entrypoint.sh"]

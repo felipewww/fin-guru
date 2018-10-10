@@ -25,5 +25,7 @@ RUN curl -sS https://getcomposer.org/installer | php \
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 
-COPY entrypoint.sh /var/www/entrypoint/entrypoint.sh
-RUN ["chmod", "+x", "/var/www/entrypoint/entrypoint.sh"]
+#COPY entrypoint.sh /var/www/entrypoint/entrypoint.sh
+#RUN ["chmod", "+x", "/var/www/entrypoint/entrypoint.sh"]
+COPY entrypoint.sh /entrypoints/squad/laravel-dbm/entrypoint.sh
+RUN ["chmod", "+x", "/entrypoints/squad/laravel-dbm/entrypoint.sh"]

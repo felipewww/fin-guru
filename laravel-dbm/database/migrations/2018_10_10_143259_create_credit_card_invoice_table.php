@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFamiliesTable extends Migration
+class CreateCreditCardInvoiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +14,8 @@ class CreateFamiliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('families', function (Blueprint $table) {
+        Schema::create('credit_card_invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('password');
             $table->timestamps();
         });
     }
@@ -30,7 +28,7 @@ class CreateFamiliesTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('families');
+        Schema::dropIfExists('credit_card_invoices');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
