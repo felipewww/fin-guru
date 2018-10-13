@@ -1,10 +1,11 @@
-import * as app from './app';
+import * as app from '../app';
 
-import FamilyController from './controllers/FamilyController';
-import UserController from './controllers/UserController';
-import Validator from './controllers/Validator';
+import FamilyController from '../controllers/FamilyController';
+import UserController from '../controllers/UserController';
+import Validator from '../controllers/Validator';
 
-import Debugger from './core/Debugger';
+import Debugger from '../core/Debugger';
+import Router from "router";
 
 
 // import JWT from "jsonwebtoken";
@@ -17,16 +18,17 @@ global._debugger = new Debugger();
 export default class Routes {
     constructor()
     {
-        this.setRoutes();
+        // this.setRoutes();
+        this._setRoutes();
     }
 
     setRoutes()
     {
-        let Router = app.default.router;
+        let Router = app.default.server;
 
         Router.put('/user', async(req, res, next) => {
             let responser = await new UserController().register(req.body);
-            console.log(responser);
+            // console.log(responser);
             res.send(responser.status, responser.getResponse());
         });
 
@@ -62,8 +64,45 @@ export default class Routes {
         });
     }
 
-    executer(method)
+    _setRoutes()
     {
+        let authRouter = app.default.authRouter;
+        app.default.router.use('/auth/', authRouter);
 
+        authRouter.route('/user')
+            .post(function (req, res, next) {
+                res.statusCode = 200;
+                next({
+                    msg: 'login user!'
+                });
+            })
+            .put(async function (req, res, next) {
+                let responser = await new UserController().register(req.body);
+                res.statusCode = responser.status;
+
+                next(responser.getResponse());
+            });
+
+        authRouter.route('/family')
+            .post(function (req, res, next) {
+
+                res.statusCode = 200;
+                next({
+                    msg: 'login family!'
+                });
+            })
+            .put(async function (req, res, next) {
+                let responser = await new FamilyController().register(req.body);
+                res.statusCode = responser.status;
+                next(responser.getResponse());
+            });
+
+        authRouter.route('/validate')
+            .post(function (req, res, next) {
+                res.statusCode = 200;
+                next({
+                    msg: 'validate token!'
+                });
+            });
     }
 }

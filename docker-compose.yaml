@@ -1,4 +1,9 @@
 version: '3'
+
+networks:
+  isolation-network:
+    driver: bridge
+
 services:
   node-auth:
     build: ./Dockerfiles/node-auth
@@ -29,19 +34,36 @@ services:
       - node-auth
       - node-lb-creditcards
 
+  gateway:
+    build: ./Dockerfiles/gateway
+    stdin_open: true
+    tty: true
+    ports:
+      - 85:85
+    command:
+      - /entrypoints/squad/gateway/entrypoint.sh
+    volumes:
+      - ./gateway:/squad/gateway
+#    networks:
+#      - isolation-network
+
   node-front:
     build: ./Dockerfiles/node-front
     stdin_open: true
     tty: true
     ports:
+#      - 8085:85
       - 80:80
     volumes:
       - ./node-front:/squad/node-front
     command:
-    - /entrypoints/squad/node-front/entrypoint.sh
-    # links:
+      - /entrypoints/squad/node-front/entrypoint.sh
+    links:
+      - gateway:gateway
       # - node-auth
       # - node-api-gateway
+#    networks:
+#      - isolation-network
 
   node-lb-creditcards:
     build: ./Dockerfiles/node-lb-creditcards

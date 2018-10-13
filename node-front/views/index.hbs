@@ -20,6 +20,27 @@
                 }
             })
         }
+
+        function req85(params = '', method = 'GET')
+        {
+            // let url = 'http://localhost:85/api/v1/creditCards'+params;
+            // let url = 'http://gateway:85';
+            let url = 'http://localhost:85'+params;
+
+            $.ajax({
+                url: url,
+                method: method,
+                contentType: "application/json",
+                success: function (data) {
+                    console.log("succ");
+                    console.log(data);
+                },
+                error: function (err) {
+                    console.log("err");
+                    console.log(err);
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -27,6 +48,11 @@
     <p>Welcome to {{title}}</p>
     <button onclick="req('', 'post')">getAll</button>
     <button onclick="req('/10')">getByID</button>
+
+    <h1>85</h1>
+    <button onclick="req85('/auth')">request AUTH</button>
+    <button onclick="req85('/api/teste')">request API</button>
+    <!--<button onclick="req('/10')">getByID</button>-->
 </body>
 </html>
 
