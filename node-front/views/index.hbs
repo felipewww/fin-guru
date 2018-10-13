@@ -2,22 +2,31 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        $.ajax({
-            url: 'http://localhost:81/login',
-            success: function (data) {
-                console.log("succ");
-                console.log(data);
-            },
-            error: function (err) {
-                console.log("err");
-                console.log(err);
-            }
-        })
+
+        function req(params = '', method = 'GET')
+        {
+            let url = 'http://localhost:3000/api/v1/creditCards'+params;
+
+            $.ajax({
+                url: url,
+                method: method,
+                success: function (data) {
+                    console.log("succ");
+                    console.log(data);
+                },
+                error: function (err) {
+                    console.log("err");
+                    console.log(err);
+                }
+            })
+        }
     </script>
 </head>
 <body>
     <h1>{{title}}</h1>
     <p>Welcome to {{title}}</p>
+    <button onclick="req('', 'post')">getAll</button>
+    <button onclick="req('/10')">getByID</button>
 </body>
 </html>
 

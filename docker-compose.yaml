@@ -4,14 +4,30 @@ services:
     build: ./Dockerfiles/node-auth
     stdin_open: true
     tty: true
-    ports:
-      - 81:81
+#    ports:
+#      - 81:81
     command:
       - /entrypoints/squad/node-auth/entrypoint.sh
+      - npm run dev
     volumes:
       - ./node-auth:/squad/node-auth
     links:
       - db
+
+  node-api-gateway:
+    build: ./Dockerfiles/node-api-gateway
+    stdin_open: true
+    tty: true
+    ports:
+      - 3000:3000
+    command:
+      - /entrypoints/squad/node-api-gateway/entrypoint.sh
+    volumes:
+      - ./node-api-gateway:/squad/node-api-gateway
+    links:
+#      - node-front #will send CORS req
+      - node-auth
+      - node-lb-creditcards
 
   node-front:
     build: ./Dockerfiles/node-front
@@ -23,15 +39,14 @@ services:
       - ./node-front:/squad/node-front
     command:
     - /entrypoints/squad/node-front/entrypoint.sh
-    links:
-      - node-auth
+    # links:
+      # - node-auth
+      # - node-api-gateway
 
   node-lb-creditcards:
     build: ./Dockerfiles/node-lb-creditcards
     stdin_open: true
     tty: true
-    ports:
-    - 3000:3000
     volumes:
       - ./node-credit-cards:/squad/node-lb-creditcards
     command:

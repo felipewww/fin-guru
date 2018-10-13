@@ -48,6 +48,14 @@ export default class Routes {
         });
 
         Router.post('/validate',  (req, res, next) => {
+            console.log("AUTH >>>".bgYellow.black);
+            console.log(req.body);
+            console.log("\n");
+            console.log("req.body.token");
+            console.log(req.body);
+            console.log("\n");
+            console.log(req.params);
+
             let responser = new Validator().validate(req.body);
             res.send(responser.status, responser.getResponse())
             // return this.validate(req, res, next)
