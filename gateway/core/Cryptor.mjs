@@ -17,7 +17,7 @@ export default class Cryptor {
 
             encrypt.update(info, 'utf8', 'hex');
         }
-        // encrypt.update('|'+data.familyId, 'utf8', 'hex');
+
         return encrypt.final('hex');
     }
 
@@ -54,7 +54,6 @@ export default class Cryptor {
     static generateFamilyToken(familyId)
     {
         return jwt.sign({
-            // data: cryptStr
             data: Cryptor.encrypt([familyId])
         }, process.env.APP_SECRET_HASH);
     }
@@ -70,5 +69,25 @@ export default class Cryptor {
         return jwt.sign({
             data: Cryptor.encrypt([userId, familyId])
         }, process.env.APP_SECRET_HASH);
+    }
+
+    static apiTokenValidation(data)
+    {
+        let res = {
+            status: true
+        };
+
+        try{
+            let decoded = jwt.verify(data.token, process.env.APP_SECRET_HASH);
+            let decodedIDS = Cryptor.decrypt(decoded.data);
+
+            res.userId = decodedIDS[0];
+            res.familyId = decodedIDS[1];
+        }catch (e) {
+            res.status = false;
+            res.error = 1000;
+        }
+
+        return res;
     }
 }

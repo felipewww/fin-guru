@@ -5,34 +5,6 @@ networks:
     driver: bridge
 
 services:
-  node-auth:
-    build: ./Dockerfiles/node-auth
-    stdin_open: true
-    tty: true
-#    ports:
-#      - 81:81
-    command:
-      - /entrypoints/squad/node-auth/entrypoint.sh
-      - npm run dev
-    volumes:
-      - ./node-auth:/squad/node-auth
-    links:
-      - db
-
-  node-api-gateway:
-    build: ./Dockerfiles/node-api-gateway
-    stdin_open: true
-    tty: true
-    ports:
-      - 3000:3000
-    command:
-      - /entrypoints/squad/node-api-gateway/entrypoint.sh
-    volumes:
-      - ./node-api-gateway:/squad/node-api-gateway
-    links:
-#      - node-front #will send CORS req
-      - node-auth
-      - node-lb-creditcards
 
   gateway:
     build: ./Dockerfiles/gateway
@@ -44,15 +16,14 @@ services:
       - /entrypoints/squad/gateway/entrypoint.sh
     volumes:
       - ./gateway:/squad/gateway
-#    networks:
-#      - isolation-network
+    links:
+      - node-lb-creditcards
 
   node-front:
     build: ./Dockerfiles/node-front
     stdin_open: true
     tty: true
     ports:
-#      - 8085:85
       - 80:80
     volumes:
       - ./node-front:/squad/node-front
@@ -60,10 +31,6 @@ services:
       - /entrypoints/squad/node-front/entrypoint.sh
     links:
       - gateway:gateway
-      # - node-auth
-      # - node-api-gateway
-#    networks:
-#      - isolation-network
 
   node-lb-creditcards:
     build: ./Dockerfiles/node-lb-creditcards

@@ -21,7 +21,7 @@ export default class CreditCards
     constructor(Router)
     {
         this.Router = Router;
-        this.prefix = '/api/v1/creditCards';
+        // this.prefix = '/api/creditCards';
 
         this.getRoutes();
         this.postRoutes();
@@ -29,57 +29,34 @@ export default class CreditCards
 
     postRoutes()
     {
-        this.Router.post(this.prefix, async(req, res, next) => {
+        this.Router.route('/creditCards')
+            .post(async (req, res, next) => {
+                let result = await this.execute(req)
+                    .then(result => {
+                        res.statusCode = 200;
+                        next({ status: true });
+                    })
+                    .catch(error => {
+                        res.statusCode = 500;
+                        next({ status: false });
+                    })
 
-            // this.reqData.method = 'post';
-
-            return await this.execute(req)
-                .then(result => {
-                    return res.send(200, result);
-                })
-                .catch(error => {
-                    return res.send(error.statusCode, error);
-                })
-
-        });
+            });
     }
 
     getRoutes()
     {
 
-        this.Router.get( this.prefix+'/:id', async(req, res, next) => {
-
-            // this.reqData.method = 'get';
-
-            return await this.execute(req)
-                .then(result => {
-                    return res.send(200, result);
-                })
-                .catch(error => {
-                    return res.send(error.statusCode, error);
-                })
-        });
-    }
-
-    /**
-     * use the same data sent to apiGateway to resend to the final request (the service)
-     * ignoring gateway prefix
-     *
-     * replace '/api/v1/creditCards/:param1/:param2' -> http://node-lb-creditcards/:param1/:param2
-     * @param fullURI
-     */
-    setURI(fullURI)
-    {
-        this.reqData.uri += fullURI.substring(this.prefix.length, fullURI.length);
     }
 
     async execute(req)
     {
         this.reqData = new reqData();
-        this.setURI(req._url.pathname);
+        this.reqData.uri += req.originalUrl;
 
         //Use the same method used on gateway request
         this.reqData.method = req.method;
+
 
         return new Promise((resolve, reject) => {
             request(this.reqData, function (error, response, body) {

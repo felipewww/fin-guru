@@ -3,11 +3,10 @@ import Router from 'router';
 import dotenv from 'dotenv';
 dotenv.config();
 import colors from 'colors';
-
 import bodyParser from 'body-parser';
 
 import authRoutes from './routes/auth';
-
+import gateway from './routes/gateway';
 
 let router = Router();
 
@@ -22,8 +21,6 @@ router.route('*').all(function (req, res, next) {
 let server = http.createServer(function(req, res) {
 
     router(req, res, (responseData, lastRes) => {
-        console.log("FINAL CALLBACK!".bgGreen.white.bold);
-
         if (res.statusCode === 404) {
             responseData = { error: 'Not found.' };
         }
@@ -35,7 +32,9 @@ server.listen(85);
 
 export default {
     router: router,
-    authRouter: Router()
+    authRouter: Router(),
+    apiRouter: Router(),
 }
 
 new authRoutes();
+new gateway();
