@@ -14,9 +14,15 @@ export default class Routes {
         let authRouter = app.default.authRouter;
         app.default.router.use('/auth/', authRouter);
 
+        authRouter.use('/', function(req, res, next){
+            let token = req.headers.authorization.split(" ")[1];
+            req.body.token = token;
+            next();
+        });
+
         authRouter.route('/user')
             .post(async function (req, res, next) {
-                let responser = await new UserController().login(req.body);
+                let responser = await new UserController().login(req.params);
                 res.statusCode = responser.status;
 
                 next(responser.getResponse());

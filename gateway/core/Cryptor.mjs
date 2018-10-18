@@ -71,19 +71,20 @@ export default class Cryptor {
         }, process.env.APP_SECRET_HASH);
     }
 
-    static apiTokenValidation(data)
+    static apiTokenValidation(token)
     {
         let res = {
             status: true
         };
 
         try{
-            let decoded = jwt.verify(data.token, process.env.APP_SECRET_HASH);
+            let decoded = jwt.verify(token, process.env.APP_SECRET_HASH);
             let decodedIDS = Cryptor.decrypt(decoded.data);
 
             res.userId = decodedIDS[0];
             res.familyId = decodedIDS[1];
         }catch (e) {
+            res.error = e;
             res.status = false;
             res.error = 1000;
         }

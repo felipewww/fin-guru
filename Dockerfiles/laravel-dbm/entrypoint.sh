@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #cd /var/www/laravel-dbm
-
+php artisan key:generate
 composer update
 #php artisan key:generate
 #php artisan migrate

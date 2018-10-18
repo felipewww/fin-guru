@@ -9,11 +9,13 @@ server.listen(80, function() {
     console.log('%s listening at %s', server.name, server.url);
 });
 
-
 server.post('/api/creditCards', function(req, res, next){
     res.send(200, {status: 'SERVICE -> New route ok!'})
 });
 
+server.get('/api/creditCards', function(req, res, next){
+    res.send(200, {status: 'SERVICE -> New route GET ok!'})
+});
 // server.post('/', function(req, res, next){
 //     res.send(200, {status: 'SERVICE -> POST NULL OK!'})
 // });

@@ -2,7 +2,6 @@ import Controller from '../core/Controller';
 
 import FamiliesModel from '../models/FamiliesModel';
 import UsersModel from '../models/UsersModel';
-// import jwt from "jsonwebtoken";
 import Cryptor from '../core/Cryptor';
 
 export default class FamilyController extends Controller{
@@ -45,14 +44,14 @@ export default class FamilyController extends Controller{
             //Find family
             let family = await this.FamiliesModel.findByUsername(data.username);
             if (!family) {
-                this.Responser.setError(2, 'Login error.');
+                this.Responser.setError(2, 'Login error 2.');
                 return this.Responser;
             }
 
             //Verify password hash
             let compare = Cryptor.comparePassword(data.password, family.password);
             if (!compare) {
-                this.Responser.setError(3, 'Login error.');
+                this.Responser.setError(3, 'Login error 3.');
                 return this.Responser;
             }
 

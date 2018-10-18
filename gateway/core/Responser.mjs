@@ -59,7 +59,7 @@ export default class Responser {
     logger(err)
     {
         let tag = process.env.APP_ENV.yellow+ " " +"Error".bgRed.white;
-        console.log(tag);+
+        console.log(tag);
         console.log(err.message);
     }
 }

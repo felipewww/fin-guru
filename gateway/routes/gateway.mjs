@@ -17,13 +17,21 @@ export default class Gateway {
     {
         this.Router.use( (req, res, next) => {
 
-            if ( !req.body.token || req.body.token === '' ) {
+            //Remove "bearer " prefix
+            let bearer = req.headers.authorization;
+            let token = bearer.split(" ")[1];
+
+            if ( !token || token === '' ) {
                 res.statusCode = 403;
-                res.end(JSON.stringify({msg: 'Token is required.'}));
+
+                res.end(
+                    JSON.stringify({body: req.body, params: req.params })
+                );
+
                 return;
             }
 
-            let validation = Cryptor.apiTokenValidation(req.body);
+            let validation = Cryptor.apiTokenValidation(token);
 
             if (!validation.status) {
                 res.statusCode = 403;

@@ -8,7 +8,7 @@ class reqData {
         this.headers= [
             {
                 name: 'content-type',
-                value: 'application/x-www-form-urlencoded'
+                value: 'application/json'
             }
         ];
 
@@ -21,7 +21,6 @@ export default class CreditCards
     constructor(Router)
     {
         this.Router = Router;
-        // this.prefix = '/api/creditCards';
 
         this.getRoutes();
         this.postRoutes();
@@ -31,6 +30,7 @@ export default class CreditCards
     {
         this.Router.route('/creditCards')
             .post(async (req, res, next) => {
+                console.log("posting".bgYellow.white.bold)
                 let result = await this.execute(req)
                     .then(result => {
                         res.statusCode = 200;
@@ -41,6 +41,11 @@ export default class CreditCards
                         next({ status: false });
                     })
 
+            })
+            .get((req, res, next) => {
+                res.statusCode = 200;
+                console.log("getting".bgYellow.white.bold)
+                next({ status: true });
             });
     }
 
