@@ -19,7 +19,7 @@ class CreateCreditCardTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('card_flag_id')->unsigned();
             $table->string('final_numbers', 4);
-            $table->date('due_date');
+            $table->integer('due_date');
             $table->timestamps();
 
             $table->foreign('user_id')

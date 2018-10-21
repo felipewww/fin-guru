@@ -15,6 +15,8 @@ export default class Manager {
             json: req.body
         };
 
+        console.log("REqDATA");
+        console.log(data);
 
         return new Promise((resolve, reject) => {
             request(data, function (error, response, body) {

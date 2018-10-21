@@ -8,8 +8,6 @@ services:
 
   gateway:
     build: ./Dockerfiles/gateway
-#    stdin_open: true
-#    tty: true
     ports:
       - 85:85
     command:
@@ -22,8 +20,6 @@ services:
 
   svc-basics:
     build: ./Dockerfiles/basics
-#    stdin_open: true
-#    tty: true
     command:
       - /entrypoints/squad/basics/entrypoint.sh
     volumes:
@@ -33,8 +29,6 @@ services:
 
   front-end:
     build: ./Dockerfiles/front-end
-#    stdin_open: true
-#    tty: true
     ports:
       - 80:80
     volumes:
@@ -46,8 +40,6 @@ services:
 
   svc-creditcards:
     build: ./Dockerfiles/svc-creditCards
-#    stdin_open: true
-#    tty: true
     volumes:
       - ./svc-creditCards:/squad/svc-creditCards
     command:
@@ -58,7 +50,6 @@ services:
   laravel-dbm:
     build: ./Dockerfiles/laravel-dbm
     stdin_open: true
-#    tty: true
     volumes:
       - ./laravel-dbm:/var/www/laravel-dbm
     command:

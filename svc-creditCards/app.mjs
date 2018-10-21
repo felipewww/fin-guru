@@ -1,27 +1,43 @@
-import restify from 'restify';
-
+import http from 'http';
+import Router from 'router';
 import dotenv from 'dotenv';
 dotenv.config();
+import colors from 'colors';
+import bodyParser from 'body-parser';
 
-var server = restify.createServer();
-server.use(restify.plugins.bodyParser());
-server.listen(80, function() {
-    console.log('%s listening at %s', server.name, server.url);
+import CreditCardsController from './controllers/CreditCardsController';
+
+let router = Router();
+
+router.use(bodyParser.json());
+
+router.route('*').all(function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    res.statusCode = 404;
+        // console.log("heeeeeeeeeeere?".bgRed.white.bold);
+    next();
 });
 
-server.post('/api/creditCards/', function(req, res, next){
-    res.send(200, {status: 'SERVICE -> New route ok!'})
+let server = http.createServer(function(req, res) {
+
+    router(req, res, (responseData) => {
+
+        if (res.statusCode === 404) {
+            responseData = { error: 'Not found.' };
+        }
+        return res.end(JSON.stringify(responseData));
+    });
+
 });
 
-// server.get('/api/creditCards', function(req, res, next){
-//     res.send(200, {status: 'SERVICE -> New route GET ok!'})
+// router.route('/api/creditCards').all(function (req, res, next) {
+//     console.log("PQP");
 // });
 
-
-server.get('/:id', function (req, res, next) {
-    res.send(200, { msg: 'Finding by ID serviço ok!' });
+router.route('/api/creditCards', function (req, res, next) {
+    console.log("PQP");
 });
-// export default {server};
 
-// import Routes from './routes';
-// new Routes();
+server.listen(80);
+
+new CreditCardsController(router, Router());

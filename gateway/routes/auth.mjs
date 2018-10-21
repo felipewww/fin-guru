@@ -35,7 +35,6 @@ export default class Routes {
 
         authRouter.route('/family')
             .post(async function (req, res, next) {
-                console.log("here?");
                 let responser = await new FamilyController().login(req.body);
                 res.statusCode = responser.status;
 

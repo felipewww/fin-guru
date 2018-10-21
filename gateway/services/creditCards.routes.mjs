@@ -13,7 +13,6 @@ export default class CreditCards extends Manager
                     next(result);
                 })
                 .catch(error => {
-                    console.log(error);
                     res.statusCode = error.statusCode;
                     next(error);
                 })

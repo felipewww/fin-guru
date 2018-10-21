@@ -23,8 +23,6 @@ let server = http.createServer(function(req, res) {
 
     //The final response
     router(req, res, (responseData) => {
-        console.log("Aqui?");
-        console.log(responseData);
 
         //When reach some service, response data never will be null, if is null, not reached any service and stopped here (on gateway)
         if ( res.statusCode === 404 && !responseData ) {
