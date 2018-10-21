@@ -1,4 +1,5 @@
 import Controller from '../core/Controller'
+import ReceivablesModel from '../models/ReceivablesModel';
 
 export default class ReceivablesController extends Controller
 {
@@ -14,33 +15,115 @@ export default class ReceivablesController extends Controller
         mainRouter.use('/api/receivables', receivablesRouter);
 
         receivablesRouter.route('/')
-            .put(function (req, res, next) {
-                // console.log(req.headers);
-                console.log("req.body".bgGreen);
-                console.log("Criar um recebível para: ");
-                console.log(req.body.userId);
-                console.log(req.body.familyId);
-                res.statusCode = 200;
-                next({
-                    status: 'receivables ok!'
-                })
-            })
-            .get(function (req, res, next) {
-                console.log("req.body".bgGreen);
-                console.log("Pegar todos os recebíveis de: ");
-                console.log(req.body.userId);
-                console.log(req.body.familyId);
-                res.statusCode = 200;
-                next({
-                    status: 'Listar os recebiveis'
-                })
-            });
+            .put(this.create)
+            .get(this.findAllByUser)
+            .delete(this.deleteById);
 
         receivablesRouter.route('/:id')
-            .get(function (req, res, next) {
+            .get(this.findById);
+    }
+
+    create(req, res, next)
+    {
+        let receivablesModel = new ReceivablesModel();
+
+        receivablesModel.model.create({
+            description: req.body.description,
+            day: req.body.day,
+            amount: req.body.amount,
+            user_id: req.body.userId,
+        })
+        .then(result => {
+            res.statusCode = 200;
+            next({
+                status: true,
+                id: result.id
+            })
+        })
+        .catch(err => {
+            res.statusCode = 500;
+            next({
+                status: false,
+                error: true,
+                msg: 'query error'
+            })
+        });
+    }
+
+    findAllByUser(req, res, next)
+    {
+        let receivablesModel = new ReceivablesModel();
+        receivablesModel.model.findAll({
+            where: {
+                user_id: req.body.userId
+            }
+        })
+            .then(result => {
                 res.statusCode = 200;
                 next({
-                    status: 'find by id'
+                    status: true,
+                    result: result
+                })
+            })
+            .catch(err => {
+                res.statusCode = 500;
+                next({
+                    status: false,
+                    error: true,
+                    msg: 'query error'
+                })
+            });
+    }
+
+    findById(req, res, next)
+    {
+        let receivablesModel = new ReceivablesModel();
+
+        receivablesModel.model.find({
+            where: {
+                id: parseInt(req.params.id),
+                user_id: parseInt(req.body.userId)
+            }
+        })
+            .then(result => {
+                res.statusCode = 200;
+                next({
+                    status: true,
+                    result: result
+                })
+            })
+            .catch(err => {
+                res.statusCode = 500;
+                next({
+                    status: false,
+                    error: true,
+                    msg: 'query error'
+                })
+            });
+    }
+
+    deleteById(req, res, next)
+    {
+        let receivablesModel = new ReceivablesModel();
+        receivablesModel.model.destroy({
+            where: {
+                id: req.body.ids,
+                user_id: req.body.userId
+            }
+        })
+            .then(result => {
+                res.statusCode = 200;
+                next({
+                    status: true,
+                    result: result
+                })
+            })
+            .catch(err => {
+                res.statusCode = 500;
+                next({
+                    status: false,
+                    error: true,
+                    msg: 'query error'
                 })
             });
     }

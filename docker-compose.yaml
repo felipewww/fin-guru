@@ -57,7 +57,7 @@ services:
 
   laravel-dbm:
     build: ./Dockerfiles/laravel-dbm
-#    stdin_open: true
+    stdin_open: true
 #    tty: true
     volumes:
       - ./laravel-dbm:/var/www/laravel-dbm

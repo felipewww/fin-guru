@@ -72,6 +72,12 @@ export default class Model {
         // this.testConnection();
     }
 
+    /**
+     *
+     * @param obj
+     * @returns {Model}
+     * @constructor
+     */
     Definer(obj)
     {
         return this.DB.define( obj.name, obj.attributes, obj.options );

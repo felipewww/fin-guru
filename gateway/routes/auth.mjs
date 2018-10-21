@@ -15,14 +15,13 @@ export default class Routes {
         app.default.router.use('/auth/', authRouter);
 
         authRouter.use('/', function(req, res, next){
-            let token = req.headers.authorization.split(" ")[1];
-            req.body.token = token;
+            req.body.token = req.headers.authorization;
             next();
         });
 
         authRouter.route('/user')
             .post(async function (req, res, next) {
-                let responser = await new UserController().login(req.params);
+                let responser = await new UserController().login(req.body);
                 res.statusCode = responser.status;
 
                 next(responser.getResponse());
@@ -36,6 +35,7 @@ export default class Routes {
 
         authRouter.route('/family')
             .post(async function (req, res, next) {
+                console.log("here?");
                 let responser = await new FamilyController().login(req.body);
                 res.statusCode = responser.status;
 
