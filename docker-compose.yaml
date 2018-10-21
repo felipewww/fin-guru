@@ -8,8 +8,8 @@ services:
 
   gateway:
     build: ./Dockerfiles/gateway
-    stdin_open: true
-    tty: true
+#    stdin_open: true
+#    tty: true
     ports:
       - 85:85
     command:
@@ -17,36 +17,48 @@ services:
     volumes:
       - ./gateway:/squad/gateway
     links:
-      - node-lb-creditcards
+      - svc-basics
+      - svc-creditcards
 
-  node-front:
-    build: ./Dockerfiles/node-front
-    stdin_open: true
-    tty: true
+  svc-basics:
+    build: ./Dockerfiles/basics
+#    stdin_open: true
+#    tty: true
+    command:
+      - /entrypoints/squad/basics/entrypoint.sh
+    volumes:
+      - ./svc-basics:/squad/basics
+    links:
+      - db
+
+  front-end:
+    build: ./Dockerfiles/front-end
+#    stdin_open: true
+#    tty: true
     ports:
       - 80:80
     volumes:
-      - ./node-front:/squad/node-front
+      - ./front-end:/squad/front-end
     command:
-      - /entrypoints/squad/node-front/entrypoint.sh
+      - /entrypoints/squad/front-end/entrypoint.sh
     links:
       - gateway:gateway
 
-  node-lb-creditcards:
-    build: ./Dockerfiles/node-lb-creditcards
-    stdin_open: true
-    tty: true
+  svc-creditcards:
+    build: ./Dockerfiles/svc-creditCards
+#    stdin_open: true
+#    tty: true
     volumes:
-      - ./node-credit-cards:/squad/node-lb-creditcards
+      - ./svc-creditCards:/squad/svc-creditCards
     command:
-      - /entrypoints/squad/node-lb-creditcards/entrypoint.sh
+      - /entrypoints/squad/svc-creditCards/entrypoint.sh
     links:
       - db
 
   laravel-dbm:
     build: ./Dockerfiles/laravel-dbm
-    stdin_open: true
-    tty: true
+#    stdin_open: true
+#    tty: true
     volumes:
       - ./laravel-dbm:/var/www/laravel-dbm
     command:

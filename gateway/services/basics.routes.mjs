@@ -1,19 +1,18 @@
 import Manager from './Manager'
 
-export default class CreditCards extends Manager
+export default class Basics extends Manager
 {
     constructor(Router)
     {
-        super('http://svc-creditcards');
+        super('http://svc-basics');
 
-        Router.route('/creditCards/*').all(async (req, res, next) => {
+        Router.route('/receivables/*').all(async (req, res, next) => {
             await this.execute(req)
                 .then(result => {
                     res.statusCode = 200;
                     next(result);
                 })
                 .catch(error => {
-                    console.log(error);
                     res.statusCode = error.statusCode;
                     next(error);
                 })
