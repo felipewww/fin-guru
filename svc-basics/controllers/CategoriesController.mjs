@@ -1,5 +1,5 @@
 import Controller from '../core/Controller'
-import ReceivablesModel from '../models/ReceivablesModel';
+import CategoriesModel from '../models/CategoriesModel';
 
 export default class ReceivablesController extends Controller
 {
@@ -11,26 +11,27 @@ export default class ReceivablesController extends Controller
 
     setRoutes(mainRouter, thisRouter)
     {
-        let receivablesRouter = thisRouter;
-        mainRouter.use('/api/receivables', receivablesRouter);
+        let categoriesRouter = thisRouter;
+        mainRouter.use('/api/categories', categoriesRouter);
 
-        receivablesRouter.route('/')
+        categoriesRouter.route('/')
             .put(this.create)
             .get(this.findAllByUser)
             .delete(this.deleteById);
 
-        receivablesRouter.route('/:id')
+        categoriesRouter.route('/:id')
             .get(this.findById);
     }
 
     create(req, res, next)
     {
-        let receivablesModel = new ReceivablesModel();
-        receivablesModel.model.create({
-            description: req.body.description,
-            day: req.body.day,
-            amount: req.body.amount,
+        let categoriesModel = new CategoriesModel();
+
+        categoriesModel.model.create({
+            name: req.body.name,
+            text_color: req.body.text_color,
             user_id: req.body.userId,
+            family_id: req.body.familyId,
         })
         .then(result => {
             res.statusCode = 200;
@@ -44,15 +45,15 @@ export default class ReceivablesController extends Controller
             next({
                 status: false,
                 error: true,
-                msg: 'query error'
+                msg: err
             })
         });
     }
 
     findAllByUser(req, res, next)
     {
-        let receivablesModel = new ReceivablesModel();
-        receivablesModel.model.findAll({
+        let categoriesModel = new CategoriesModel();
+        categoriesModel.model.findAll({
             where: {
                 user_id: req.body.userId
             }
@@ -76,9 +77,9 @@ export default class ReceivablesController extends Controller
 
     findById(req, res, next)
     {
-        let receivablesModel = new ReceivablesModel();
+        let categoriesModel = new CategoriesModel();
 
-        receivablesModel.model.find({
+        categoriesModel.model.find({
             where: {
                 id: parseInt(req.params.id),
                 user_id: parseInt(req.body.userId)
@@ -103,8 +104,8 @@ export default class ReceivablesController extends Controller
 
     deleteById(req, res, next)
     {
-        let receivablesModel = new ReceivablesModel();
-        receivablesModel.model.destroy({
+        let categoriesModel = new CategoriesModel();
+        categoriesModel.model.destroy({
             where: {
                 id: req.body.ids,
                 user_id: req.body.userId

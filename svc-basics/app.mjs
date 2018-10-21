@@ -6,6 +6,7 @@ import colors from 'colors';
 import bodyParser from 'body-parser';
 
 import ReceivablesController from './controllers/ReceivablesController'
+import CategoriesController from './controllers/CategoriesController'
 
 let router = Router();
 
@@ -30,4 +31,5 @@ let server = http.createServer(function(req, res) {
 
 server.listen(80);
 
-new ReceivablesController(router);
+new ReceivablesController(router, Router());
+new CategoriesController(router, Router());

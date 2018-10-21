@@ -40,8 +40,8 @@ export default class Gateway {
             }
 
             //Assign decoded IDS into service request data
-            req.body.userId = validation.userId;
-            req.body.familyId = validation.familyId;
+            req.body.userId = parseInt(validation.userId);
+            req.body.familyId = parseInt(validation.familyId);
 
             next();
         })
