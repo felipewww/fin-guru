@@ -17,13 +17,32 @@ services:
     links:
       - svc-basics
       - svc-creditcards
+      - svc-payables
 
   svc-basics:
-    build: ./Dockerfiles/basics
+    build: ./Dockerfiles/svc-basics
     command:
       - /entrypoints/squad/basics/entrypoint.sh
     volumes:
       - ./svc-basics:/squad/basics
+    links:
+      - db
+
+  svc-creditcards:
+    build: ./Dockerfiles/svc-creditCards
+    volumes:
+      - ./svc-creditCards:/squad/svc-creditCards
+    command:
+      - /entrypoints/squad/svc-creditCards/entrypoint.sh
+    links:
+      - db
+
+  svc-payables:
+    build: ./Dockerfiles/svc-payables
+    volumes:
+      - ./svc-payables:/squad/svc-payables
+    command:
+      - /entrypoints/squad/svc-payables/entrypoint.sh
     links:
       - db
 
@@ -37,15 +56,6 @@ services:
       - /entrypoints/squad/front-end/entrypoint.sh
     links:
       - gateway:gateway
-
-  svc-creditcards:
-    build: ./Dockerfiles/svc-creditCards
-    volumes:
-      - ./svc-creditCards:/squad/svc-creditCards
-    command:
-      - /entrypoints/squad/svc-creditCards/entrypoint.sh
-    links:
-      - db
 
   laravel-dbm:
     build: ./Dockerfiles/laravel-dbm

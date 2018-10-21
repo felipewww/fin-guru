@@ -5,7 +5,7 @@ dotenv.config();
 import colors from 'colors';
 import bodyParser from 'body-parser';
 
-import CreditCardsController from './controllers/CreditCardsController';
+// import CreditCardsController from './controllers/CreditCardsController';
 
 let router = Router();
 
@@ -31,4 +31,4 @@ let server = http.createServer(function(req, res) {
 
 server.listen(80);
 
-new CreditCardsController(router, Router());
+// new CreditCardsController(router, Router());
