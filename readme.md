@@ -36,3 +36,5 @@ this.validator(req.body, {
 -[ ] Enviar as variaveis de ambiente DB_ via docker, para não precisar ficar alterando todos os .env
 
 -[ ] o mesmo serve para uma classe de logger, utilziadas por todos os serviços, para avaliar todas as requisições feitas em todos os serviços
+
+-[ ] Os serviços de VariablePayable (contas variáveis ) não terá rotas comuns, pois esses valores são gerados após importação de fatura ou fechamento de período
