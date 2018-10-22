@@ -35,4 +35,10 @@ this.validator(req.body, {
 
 -[ ] Enviar as variaveis de ambiente DB_ via docker, para não precisar ficar alterando todos os .env
 
--[ ] o mesmo serve para uma classe de logger, utilziadas por todos os serviços, para avaliar todas as requisições feitas em todos os serviços
+-[ ] o mesmo serve para uma classe de logger, utilizadas por todos os serviços, para avaliar todas as requisições feitas em todos os serviços
+
+-[ ] Inserir comentáriso descritivos das funções de cada tabela nos arquivos de migration, ou criar uma documentação pra isso.
+
+-[ ] Utilizar mongodb para fechar período
+
+-[ ] Focar em: TDD com pipeline, chai e mocha, git flow
