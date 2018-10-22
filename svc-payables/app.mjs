@@ -7,6 +7,11 @@ import bodyParser from 'body-parser';
 
 // import CreditCardsController from './controllers/CreditCardsController';
 
+import FixedAmountController from './controllers/FixedPayable/FixedAmountController';
+import FixedVariableAmountController from './controllers/FixedPayable/VariableAmountController';
+import DelayedController from './controllers/Payable/DelayedController';
+import VariableAmountController from './controllers/Payable/VariableAmountController';
+
 let router = Router();
 
 router.use(bodyParser.json());
@@ -32,3 +37,7 @@ let server = http.createServer(function(req, res) {
 server.listen(80);
 
 // new CreditCardsController(router, Router());
+new FixedAmountController(router, Router());
+new FixedVariableAmountController(router, Router());
+new DelayedController(router, Router());
+new VariableAmountController(router, Router());

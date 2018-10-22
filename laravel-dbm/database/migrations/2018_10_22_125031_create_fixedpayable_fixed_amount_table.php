@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCreditCardTable extends Migration
+class CreateFixedpayableFixedAmountTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,23 +14,29 @@ class CreateCreditCardTable extends Migration
      */
     public function up()
     {
-        Schema::create('credit_cards', function (Blueprint $table) {
+        Schema::create('fixedpayable_fixed_amount', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('card_flag_id')->unsigned();
-            $table->string('final_numbers', 4);
+            $table->string('description');
             $table->integer('due_date');
-            $table->timestamps();
+            $table->decimal('amount');
+
+            $table->integer('category_id')->unsigned();
+
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('restrict');
+
+            $table->integer('user_id')->unsigned();
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('card_flag_id')
-                ->references('id')
-                ->on('card_flags')
-                ->onDelete('restrict');
+            $table->string('status');
+
+            $table->timestamps();
         });
     }
 
@@ -42,7 +48,7 @@ class CreateCreditCardTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('credit_cards');
+        Schema::dropIfExists('fixedpayable_fixed_amount');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
