@@ -5,7 +5,7 @@ export default class DelayedController
     constructor(mainRouter, thisRouter)
     {
         this.Router = thisRouter;
-        mainRouter.use('/api/payables/variable', this.Router);
+        mainRouter.use('/api/payables/variable/delayed', this.Router);
 
         this.setRoutes();
     }

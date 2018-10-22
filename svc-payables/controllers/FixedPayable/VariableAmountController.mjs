@@ -5,7 +5,7 @@ export default class VariableAmountController
     constructor(mainRouter, thisRouter)
     {
         this.Router = thisRouter;
-        mainRouter.use('/api/payables/fixed', this.Router);
+        mainRouter.use('/api/payables/fixed/variableAmount', this.Router);
 
         this.setRoutes();
     }
@@ -27,10 +27,12 @@ export default class VariableAmountController
             let Model = new FixedpayableVariableAmountModel();
 
             Model.model.create({
-                final_numbers: req.body.final_numbers,
+                description: req.body.description,
                 due_date: req.body.due_date,
+                amount_planned: req.body.amount_planned,
+                amount_paid: req.body.amount_paid,
+                category_id: req.body.category_id,
                 user_id: req.body.userId,
-                card_flag_id: req.body.card_flag_id,
             })
                 .then(result => {
                     res.statusCode = 200;

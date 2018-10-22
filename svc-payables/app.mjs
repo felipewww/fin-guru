@@ -5,12 +5,11 @@ dotenv.config();
 import colors from 'colors';
 import bodyParser from 'body-parser';
 
-// import CreditCardsController from './controllers/CreditCardsController';
-
 import FixedAmountController from './controllers/FixedPayable/FixedAmountController';
 import FixedVariableAmountController from './controllers/FixedPayable/VariableAmountController';
-import DelayedController from './controllers/Payable/DelayedController';
-import VariableAmountController from './controllers/Payable/VariableAmountController';
+
+import DelayedController from './controllers/VariablePayable/DelayedController';
+import VariableAmountController from './controllers/VariablePayable/VariableAmountController';
 
 let router = Router();
 
@@ -36,7 +35,6 @@ let server = http.createServer(function(req, res) {
 
 server.listen(80);
 
-// new CreditCardsController(router, Router());
 new FixedAmountController(router, Router());
 new FixedVariableAmountController(router, Router());
 new DelayedController(router, Router());

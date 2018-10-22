@@ -5,7 +5,7 @@ export default class FixedAmountController
     constructor(mainRouter, thisRouter)
     {
         this.Router = thisRouter;
-        mainRouter.use('/api/payables/fixed', this.Router);
+        mainRouter.use('/api/payables/fixed/fixedAmount', this.Router);
 
         this.setRoutes();
     }

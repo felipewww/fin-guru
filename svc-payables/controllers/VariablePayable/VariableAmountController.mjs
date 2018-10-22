@@ -5,7 +5,7 @@ export default class VariableAmountController
     constructor(mainRouter, thisRouter)
     {
         this.Router = thisRouter;
-        mainRouter.use('/api/payables/variable', this.Router);
+        mainRouter.use('/api/payables/variable/variableAmount', this.Router);
 
         this.setRoutes();
     }

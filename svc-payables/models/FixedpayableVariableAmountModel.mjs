@@ -24,10 +24,7 @@ export default class FixedpayableVariableAmountModel extends Model {
                 },
                 user_id: {
                     type: Sequelize.INTEGER
-                },
-                status: {
-                    type: Sequelize.STRING
-                },
+                }
             },
             {
                 createdAt   : 'created_at',
