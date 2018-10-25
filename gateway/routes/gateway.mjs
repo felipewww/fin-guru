@@ -2,6 +2,7 @@ import * as app from '../app';
 
 import CreditCardsService from '../services/creditCards.routes'
 import BasicsService from '../services/basics.routes';
+import PayablesService from '../services/payables.routes';
 
 import Cryptor from '../core/Cryptor';
 
@@ -52,5 +53,6 @@ export default class Gateway {
     {
         new CreditCardsService(this.Router);
         new BasicsService(this.Router);
+        new PayablesService(this.Router);
     }
 }

@@ -13,7 +13,7 @@ export default class CreditCardsController
     setRoutes()
     {
         this.Router.route('/')
-            .put(this.create)
+            .post(this.create)
             .get(this.findAllByUser)
             .delete(this.deleteById);
 

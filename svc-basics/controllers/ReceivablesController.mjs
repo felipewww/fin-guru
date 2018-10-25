@@ -15,7 +15,7 @@ export default class ReceivablesController extends Controller
         mainRouter.use('/api/receivables', receivablesRouter);
 
         receivablesRouter.route('/')
-            .put(this.create)
+            .post(this.create)
             .get(this.findAllByUser)
             .delete(this.deleteById);
 

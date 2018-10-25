@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReceivablesTable extends Migration
+class CreatePayableVariableAmountTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,21 @@ class CreateReceivablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('receivables', function (Blueprint $table) {
+        Schema::create('payable_variable_amount', function (Blueprint $table) {
             $table->increments('id');
-
             $table->string('description');
-            $table->integer('day');
+            $table->integer('due_date');
             $table->decimal('amount');
+            $table->integer('installments_total');
+            $table->integer('installments_current');
+            $table->enum('type', ['planned','unplanned']);
+
+            $table->integer('category_id')->unsigned();
+
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('restrict');
 
             $table->integer('user_id')->unsigned();
 
@@ -27,6 +36,8 @@ class CreateReceivablesTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
+            $table->string('status');
 
             $table->timestamps();
         });
@@ -40,7 +51,7 @@ class CreateReceivablesTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('receivables');
+        Schema::dropIfExists('payable_variable_amount');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

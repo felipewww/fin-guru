@@ -1,59 +1,68 @@
-import Controller from '../core/Controller'
-import CategoriesModel from '../models/CategoriesModel';
+import FixedpayableVariableAmountModel from '../../models/FixedpayableVariableAmountModel';
 
-export default class ReceivablesController extends Controller
+export default class VariableAmountController
 {
     constructor(mainRouter, thisRouter)
     {
-        super();
-        this.setRoutes(mainRouter, thisRouter);
+        this.Router = thisRouter;
+        mainRouter.use('/api/payables/fixed/variableAmount', this.Router);
+
+        this.setRoutes();
     }
 
-    setRoutes(mainRouter, thisRouter)
+    setRoutes()
     {
-        let categoriesRouter = thisRouter;
-        mainRouter.use('/api/categories', categoriesRouter);
-
-        categoriesRouter.route('/')
+        this.Router.route('/')
             .post(this.create)
             .get(this.findAllByUser)
             .delete(this.deleteById);
 
-        categoriesRouter.route('/:id')
+        this.Router.route('/:id')
             .get(this.findById);
     }
 
     create(req, res, next)
     {
-        let categoriesModel = new CategoriesModel();
+        try{
+            let Model = new FixedpayableVariableAmountModel();
 
-        categoriesModel.model.create({
-            name: req.body.name,
-            text_color: req.body.text_color,
-            user_id: req.body.userId,
-            family_id: req.body.familyId,
-        })
-        .then(result => {
-            res.statusCode = 200;
-            next({
-                status: true,
-                id: result.id
+            Model.model.create({
+                description: req.body.description,
+                due_date: req.body.due_date,
+                amount_planned: req.body.amount_planned,
+                amount_paid: req.body.amount_paid,
+                category_id: req.body.category_id,
+                user_id: req.body.userId,
             })
-        })
-        .catch(err => {
-            res.statusCode = 500;
+                .then(result => {
+                    res.statusCode = 200;
+                    next({
+                        status: true,
+                        id: result.id
+                    })
+                })
+                .catch(err => {
+                    res.statusCode = 500;
+                    next({
+                        status: false,
+                        error: true,
+                        msg: err
+                    })
+                });
+        }catch (e) {
+            res.statusCode = 200;
             next({
                 status: false,
                 error: true,
-                msg: err
+                msg: e
             })
-        });
+        }
     }
 
     findAllByUser(req, res, next)
     {
-        let categoriesModel = new CategoriesModel();
-        categoriesModel.model.findAll({
+        let Model = new FixedpayableVariableAmountModel();
+        Model.model.findAll({
             where: {
                 user_id: req.body.userId
             }
@@ -77,9 +86,9 @@ export default class ReceivablesController extends Controller
 
     findById(req, res, next)
     {
-        let categoriesModel = new CategoriesModel();
+        let Model = new FixedpayableVariableAmountModel();
 
-        categoriesModel.model.find({
+        Model.model.find({
             where: {
                 id: parseInt(req.params.id),
                 user_id: parseInt(req.body.userId)
@@ -104,8 +113,8 @@ export default class ReceivablesController extends Controller
 
     deleteById(req, res, next)
     {
-        let categoriesModel = new CategoriesModel();
-        categoriesModel.model.destroy({
+        let Model = new FixedpayableVariableAmountModel();
+        Model.model.destroy({
             where: {
                 id: req.body.ids,
                 user_id: req.body.userId

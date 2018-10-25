@@ -42,3 +42,10 @@ this.validator(req.body, {
 -[ ] Utilizar mongodb para fechar período
 
 -[ ] Focar em: TDD com pipeline, chai e mocha, git flow
+-[ ] o mesmo serve para uma classe de logger, utilziadas por todos os serviços, para avaliar todas as requisições feitas em todos os serviços
+
+-[ ] Os serviços de VariablePayable (contas variáveis ) não terá rotas comuns, pois esses valores são gerados após importação de fatura ou fechamento de período
+
+-[ ] Rabbit mqueue
+
+- [ ] sessão firebase

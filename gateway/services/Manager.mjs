@@ -38,7 +38,6 @@ export default class Manager {
                         error: body,
                         route: data.uri,
                         method: data.method.toUpperCase(),
-                        msg: 'This route is not registered on service yet.'
                     })
                 }
             });
