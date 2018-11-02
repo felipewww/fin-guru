@@ -1,0 +1,44 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#topbar{
+    background-color: #151517;
+    height: 55px;
+}
+
+div#rainbow{
+    background: linear-gradient(270deg, #00ff85, #09dcff, #f200ff, #825bfd, #ff9400);
+    background-size: 250% 250%;
+
+    -webkit-animation: AnimationName 15s ease infinite;
+    -moz-animation: AnimationName 15s ease infinite;
+    animation: AnimationName 15s ease infinite;
+
+    height: 1px;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    25%{background-position:0% 25%}
+    50%{background-position:100% 50%}
+    75%{background-position:100% 75%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    25%{background-position:0% 25%}
+    50%{background-position:100% 50%}
+    75%{background-position:100% 75%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    25%{background-position:0% 25%}
+    50%{background-position:100% 50%}
+    75%{background-position:100% 75%}
+    100%{background-position:0% 50%}
+}

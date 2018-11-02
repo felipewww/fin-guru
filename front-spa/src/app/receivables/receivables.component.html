@@ -1,0 +1,10 @@
+<ul *ngIf="data.length > 0">
+    <li *ngFor="let receivable of data">
+        <span (click)="delete(receivable, data)">deletar</span>
+        <span>{{ receivable.id }}</span>
+        <span>{{ receivable.description }}</span>
+        <span>{{ receivable.amount }}</span>
+    </li>
+</ul>
+
+<div *ngIf="data.length === 0">Nenhuma conta cadastrada</div>

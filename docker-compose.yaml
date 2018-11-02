@@ -46,14 +46,25 @@ services:
     links:
       - db
 
-  front-end:
-    build: ./Dockerfiles/front-end
+#  front-end:
+#    build: ./Dockerfiles/front-end
+#    ports:
+#      - 80:80
+#    volumes:
+#      - ./front-end:/squad/front-end
+#    command:
+#      - /entrypoints/squad/front-end/entrypoint.sh
+#    links:
+#      - gateway:gateway
+
+  front-spa:
+    build: ./Dockerfiles/front-spa
     ports:
-      - 80:80
+      - 4200:4200
     volumes:
-      - ./front-end:/squad/front-end
+      - ./front-spa:/squad/front-spa
     command:
-      - /entrypoints/squad/front-end/entrypoint.sh
+      - /entrypoints/squad/front-spa/entrypoint.sh
     links:
       - gateway:gateway
 

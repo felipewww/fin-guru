@@ -1,0 +1,198 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
+@import "assets/arrows/css/fontello.css";
+
+body {
+    margin: 0;
+    background-color: #25262B;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+* {-webkit-font-smoothing: antialiased;}
+
+ul {
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+}
+
+div#content{
+    padding: 20px 25px 0;
+    height: calc(100% - 85px);
+    box-sizing: border-box;
+    padding-top: 80px;
+}
+
+div.head-title {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #797e9a;
+    /*padding-left: 15px;*/
+}
+
+div.head-title.green > span{
+    font-family: 'Roboto Slab', serif;
+    color: #DCFA4A;
+    /*font-size: 14px;*/
+    font-weight: 100;
+}
+
+div.head-title.orange > span{
+    font-family: 'Roboto Slab', serif;
+    color: #f7e777;
+    /*font-size: 14px;*/
+    font-weight: 100;
+}
+
+div.spacer{
+    display: block !important;
+    padding: 10px 0;
+}
+
+.row:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.row {
+    width: 100%;
+}
+
+[class*="col-"]{
+    float: left;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/*FOLDER*/
+
+.folder-amount-total {
+    color: #a7cd4a;
+    float: right;
+    margin-right: 20px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+}
+
+.folder-title.orange {
+    /*background: #161617;*/
+    background-color: rgba(0,0,0,0.3);
+    padding: 10px 40px;
+    float: left;
+    border-radius: 10px 10px 0 0;
+    margin-left: 20px;
+}
+
+.folder-title.orange span {
+    font-family: 'Roboto Slab', serif;
+    color: #fff;
+    font-size: 14px;
+}
+
+.folder-content{
+    clear: both;
+    background-color: rgba(0,0,0,0.1);
+    padding: 25px;
+    color: gray;
+    font-size: 13px;
+}
+
+/*COLS*/
+
+.col-12 {
+    width: 100%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+/*ICONS*/
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: initial;
+    text-decoration: inherit;
+    width: auto;
+    margin-right: 0;
+    text-align: center;
+    opacity: 1;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 0;
+    margin-left: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-up-dir, .icon-down-dir {
+    font-size: 20px;
+}
+
+.arrowbox-red-up .icon-up-dir.active:before,
+.arrowbox-green-up .icon-down-dir.active:before
+{
+    background: linear-gradient(to right, #ff0015 20%, #b00f00 40%, #830004 60%, #b00f00 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 1s infinite linear;
+}
+
+.arrowbox-red-up .icon-down-dir.active:before,
+.arrowbox-green-up .icon-up-dir.active:before
+{
+    background: linear-gradient(to right, #edff0b 20%, #a8b70a 40%, #6e7c09 60%, #c4d50a 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 1s infinite linear;
+}
+
+[class*="arrowbox-"]{
+    display: inline-block;
+}
+
+[class*="arrowbox-"] .arrows {
+    margin: 0 auto;
+    width: 21px;
+}
+
+[class*="arrowbox-"] .arrows i:last-child {
+    margin-left: -5px;
+    color: #3e3e58;
+}
+
+.arrow-percent {
+    font-family: 'Roboto slab';
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+}
+
+@-webkit-keyframes hue {
+    to {
+        background-position: 200% center;
+        /*background-position: center 200% ;*/
+    }
+}
+
+
