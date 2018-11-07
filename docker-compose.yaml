@@ -59,6 +59,7 @@ services:
 
   front-spa:
     build: ./Dockerfiles/front-spa
+    stdin_open: true
     ports:
       - 4200:4200
     volumes:

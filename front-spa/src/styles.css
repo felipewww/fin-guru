@@ -70,39 +70,6 @@ div.spacer{
     box-sizing: border-box;
 }
 
-/*FOLDER*/
-
-.folder-amount-total {
-    color: #a7cd4a;
-    float: right;
-    margin-right: 20px;
-    font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-}
-
-.folder-title.orange {
-    /*background: #161617;*/
-    background-color: rgba(0,0,0,0.3);
-    padding: 10px 40px;
-    float: left;
-    border-radius: 10px 10px 0 0;
-    margin-left: 20px;
-}
-
-.folder-title.orange span {
-    font-family: 'Roboto Slab', serif;
-    color: #fff;
-    font-size: 14px;
-}
-
-.folder-content{
-    clear: both;
-    background-color: rgba(0,0,0,0.1);
-    padding: 25px;
-    color: gray;
-    font-size: 13px;
-}
-
 /*COLS*/
 
 .col-12 {

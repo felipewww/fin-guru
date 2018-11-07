@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ReceivablesModel} from "../models/receivables.model";
+import {ReceivablesModel} from "../pages/home/receivables/receivables.model";
 
 @Component({
   selector: 'app-databox',

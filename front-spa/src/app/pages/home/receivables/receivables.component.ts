@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ReceivablesModel} from "../models/receivables.model";
+import {ReceivablesModel} from "./receivables.model";
 
 @Component({
   selector: 'app-receivables',
@@ -18,7 +18,7 @@ export class ReceivablesComponent implements OnInit {
     }
 
     delete($this: ReceivablesModel, ReceivablesModelArray: ReceivablesModel[]){
-        for(let item of ReceivablesModelArray){
+        for (let item of ReceivablesModelArray) {
             if (item === $this) {
                 ReceivablesModelArray.splice( ReceivablesModelArray.indexOf(item) ,1);
             }

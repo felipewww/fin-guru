@@ -1,0 +1,14 @@
+<div class="folder">
+  <div class="folder-header">
+    <div class="folder-title orange">
+      <span>{{title}} <span style="font-weight: bold">{{highlightTitle}}</span></span>
+    </div>
+    <div (click)="addNewEvent()">adicionar</div>
+    <div class="folder-amount-total">R$ 2000.00</div>
+  </div>
+
+  <div class="folder-content">
+    <ng-content *ngIf="component.items.length > 0"></ng-content>
+    <div *ngIf="component.items.length === 0">Nada a declarar!</div>
+  </div>
+</div>
