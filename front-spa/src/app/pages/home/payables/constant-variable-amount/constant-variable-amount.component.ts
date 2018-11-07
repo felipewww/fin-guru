@@ -1,34 +1,26 @@
 import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {ContainerizableClass} from '../../../../shared/container/containerizable.class';
+import {ConstantFixedAmountModel} from '../constant-fixed-amount/constant-fixed-amount.model';
 
 @Component({
   selector: 'app-constant-variable-amount',
   templateUrl: './constant-variable-amount.component.html',
-  // providers: []
 })
-
-// @Injectable()
 
 export class ConstantVariableAmountComponent extends ContainerizableClass implements OnInit {
 
-  // public items: [{}];
+  public items: Array<ConstantFixedAmountModel>;
 
   @Input() theTeste: string;
 
-  // constructor(public items: string) {
   constructor() {
     super();
-    this.items.push({
-      id: 1,
-      name: 'teste'
-    });
-  }
 
-  // public It
+    this.items = ConstantFixedAmountModel.find();
+  }
 
   ngOnInit() {
     console.log('init!');
-    // console.log("init!");
   }
 
   addNew() {

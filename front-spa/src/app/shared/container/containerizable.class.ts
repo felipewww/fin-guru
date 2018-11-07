@@ -2,9 +2,9 @@ import {ContainerizableInterface} from './containerizable.interface';
 
 export class ContainerizableClass implements ContainerizableInterface{
 
-  public items: [{}];
+  public items: Array<any>;
 
-  constructor(){
+  constructor() {
     this.items = [];
   }
 
@@ -13,7 +13,6 @@ export class ContainerizableClass implements ContainerizableInterface{
   }
 
   addNew() {
-    // console.error('addNew() is not defined yet. This method should be override by child class', this);
     this.errorLog({
       methodName: 'addNew'
     });
