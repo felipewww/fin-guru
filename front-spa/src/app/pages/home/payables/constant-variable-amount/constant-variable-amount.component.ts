@@ -13,10 +13,7 @@ import {PayablesFixedVariableAmountModel} from '../../../../models/payables-fixe
 @Injectable()
 export class ConstantVariableAmountComponent extends ContainerizableClass implements OnInit {
 
-  // public items: Array<ConstantFixedAmountModel>;
   public items: Array<PayablesFixedVariableAmountModel>;
-
-  @Input() theTeste: string;
 
   constructor(private constantVariableAmountService: ConstantVariableAmountService) {
     super();

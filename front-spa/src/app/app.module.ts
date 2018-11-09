@@ -18,6 +18,7 @@ import { LoginComponent } from './pages/login/login.component';
 
 import {HttpModule} from '@angular/http';
 import {ConstantVariableAmountService} from './pages/home/payables/constant-variable-amount/constant-variable-amount-service';
+import {ConstantFixedAmountService} from './pages/home/payables/constant-fixed-amount/constant-fixed-amount-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,10 @@ import {ConstantVariableAmountService} from './pages/home/payables/constant-vari
     AppRoutingModule,
     HttpModule
   ],
-  providers: [ConstantVariableAmountService],
+  providers: [
+    ConstantVariableAmountService,
+    ConstantFixedAmountService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

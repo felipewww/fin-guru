@@ -1,4 +1,4 @@
-export class ConstantFixedAmountModel {
+export class PayableFixedFixedAmountModel {
   id: number;
   description: string;
   day: number;
@@ -11,7 +11,7 @@ export class ConstantFixedAmountModel {
     this.amount = ref.amount;
   }
 
-  static find(): Array<ConstantFixedAmountModel>{
+  static find(): Array<PayableFixedFixedAmountModel> {
     const fakeHttpResponseData: Array<any> = [
       {
         id: 1,
@@ -27,10 +27,10 @@ export class ConstantFixedAmountModel {
       }
     ];
 
-    const res: Array<ConstantFixedAmountModel> = [];
+    const res: Array<PayableFixedFixedAmountModel> = [];
 
     fakeHttpResponseData.map((item, idx, all) => {
-      res.push(new ConstantFixedAmountModel(item));
+      res.push(new PayableFixedFixedAmountModel(item));
     });
 
     return res;

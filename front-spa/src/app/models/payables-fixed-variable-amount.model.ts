@@ -9,7 +9,6 @@ export class PayablesFixedVariableAmountModel {
   due_date: string;
   updated_at: string;
   user_id: number;
-  pro_teste: number;
 
   constructor(ref: {id, amount_paid, amount_planned, category_id, created_at, description, due_date, updated_at, user_id}) {
     this.id = ref.id;
@@ -22,29 +21,4 @@ export class PayablesFixedVariableAmountModel {
     this.updated_at = ref.updated_at;
     this.user_id = ref.user_id;
   }
-
-  // static find(): Array<PayablesFixedVariableAmountModel>{
-  //   const fakeHttpResponseData: Array<any> = [
-  //     {
-  //       id: 1,
-  //       description: 'Item fake 1',
-  //       day: 23,
-  //       amount: 12,
-  //     },
-  //     {
-  //       id: 2,
-  //       description: 'Item fake 2',
-  //       day: 23,
-  //       amount: 12,
-  //     }
-  //   ];
-  //
-  //   const res: Array<PayablesFixedVariableAmountModel> = [];
-  //
-  //   fakeHttpResponseData.map((item, idx, all) => {
-  //     res.push(new PayablesFixedVariableAmountModel(item));
-  //   });
-  //
-  //   return res;
-  // }
 }

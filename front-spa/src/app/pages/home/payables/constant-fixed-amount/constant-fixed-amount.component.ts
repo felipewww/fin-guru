@@ -1,25 +1,32 @@
 import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {ContainerizableInterface} from '../../../../shared/container/containerizable.interface';
 import {ContainerizableClass} from '../../../../shared/container/containerizable.class';
+import {PayableFixedFixedAmountModel} from '../../../../models/payable-fixed-fixed-amount.model';
+import {ConstantFixedAmountService} from './constant-fixed-amount-service';
 
 @Component({
   selector: 'app-constant-fixed-amount',
   templateUrl: './constant-fixed-amount.component.html'
 })
 
-// @Injectable
+@Injectable()
 export class ConstantFixedAmountComponent extends ContainerizableClass implements OnInit {
 
-  public objTeste: string;
-  // @Input() teste?: string;
+  public items: Array<PayableFixedFixedAmountModel>;
 
-  // constructor(public propTest: string) {
-  constructor() {
+  constructor(private constantFixedAmountService: ConstantFixedAmountService) {
     super();
-    // this.propTest = 'aa';
   }
 
   ngOnInit() {
+
+    this.constantFixedAmountService.payables()
+      .subscribe((res) => {
+        console.log('resOBSERVABLE');
+        console.log(res);
+        this.items = res.result;
+        this.sumValues();
+      });
   }
 
   /**
@@ -29,8 +36,10 @@ export class ConstantFixedAmountComponent extends ContainerizableClass implement
     console.log('@Override adding new from fixed amount comp.');
   }
 
-  sumValues() {
-    return 123.45;
+  sumValues(): void {
+    this.items.map((item) => {
+      this.amountTotal += item.amount;
+    });
   }
 
 }
