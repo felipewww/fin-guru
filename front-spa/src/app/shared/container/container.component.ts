@@ -16,7 +16,7 @@ export class ContainerComponent implements OnInit, AfterContentInit {
   @Input() title: string;
   @Input() highlightTitle: string;
 
-  private sum: number = null;
+  // private sum: number = null;
 
   @ContentChild('ConstantFixedAmountComponent, ConstantVariableAmountComponent') component: ContainerizableClass;
 
@@ -26,9 +26,6 @@ export class ContainerComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    this.sum = this.component.sumValues();
-    console.log('this.component');
-    console.log(this);
   }
 
   addNewEvent() {

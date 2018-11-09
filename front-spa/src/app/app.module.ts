@@ -8,7 +8,6 @@ import { NegativeArrowUpComponent } from './shared/graphs/negative-arrow-up/nega
 import { NegativeArrowDownComponent } from './shared/graphs/negative-arrow-down/negative-arrow-down.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CreditCardComponent } from './pages/credit-card/credit-card.component';
-import { DataboxComponent } from './databox/databox.component';
 import { ReceivablesComponent } from './pages/home/receivables/receivables.component';
 
 import { ContainerComponent } from './shared/container/container.component';
@@ -16,6 +15,9 @@ import { ConstantFixedAmountComponent } from './pages/home/payables/constant-fix
 import { ConstantVariableAmountComponent } from './pages/home/payables/constant-variable-amount/constant-variable-amount.component';
 import { MenuComponent } from './default/menu/menu.component';
 import { LoginComponent } from './pages/login/login.component';
+
+import {HttpModule} from '@angular/http';
+import {ConstantVariableAmountService} from './pages/home/payables/constant-variable-amount/constant-variable-amount-service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,6 @@ import { LoginComponent } from './pages/login/login.component';
     NegativeArrowDownComponent,
     HomeComponent,
     CreditCardComponent,
-    DataboxComponent,
     ReceivablesComponent,
     ContainerComponent,
     ConstantFixedAmountComponent,
@@ -35,9 +36,10 @@ import { LoginComponent } from './pages/login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [ConstantVariableAmountComponent],
+  providers: [ConstantVariableAmountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

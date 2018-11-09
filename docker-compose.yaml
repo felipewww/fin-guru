@@ -46,17 +46,6 @@ services:
     links:
       - db
 
-#  front-end:
-#    build: ./Dockerfiles/front-end
-#    ports:
-#      - 80:80
-#    volumes:
-#      - ./front-end:/squad/front-end
-#    command:
-#      - /entrypoints/squad/front-end/entrypoint.sh
-#    links:
-#      - gateway:gateway
-
   front-spa:
     build: ./Dockerfiles/front-spa
     stdin_open: true
@@ -67,7 +56,7 @@ services:
     command:
       - /entrypoints/squad/front-spa/entrypoint.sh
     links:
-      - gateway:gateway
+      - gateway
 
   laravel-dbm:
     build: ./Dockerfiles/laravel-dbm

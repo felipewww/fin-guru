@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DataboxComponent } from './databox/databox.component';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,4 @@ import { DataboxComponent } from './databox/databox.component';
 })
 export class AppComponent {
   title = 'front-spa';
-
-  currency = 'R$';
 }

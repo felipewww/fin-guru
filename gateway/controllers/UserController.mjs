@@ -58,6 +58,11 @@ export default class UserController extends Controller{
                 return this.Responser;
             }
 
+            console.log("DATASENT".bgRed);
+            // console.log(user);
+            let pass = await Cryptor.generatePassword(data.password)
+            console.log(pass);
+
             // let validatePassword = await Cryptor.comparePassword(data.password, user.password);
             if ( !await Cryptor.comparePassword(data.password, user.password) ) {
                 this.Responser.setError(3, 'Login error');

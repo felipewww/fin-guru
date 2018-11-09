@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // apiUrl: 'http://gateway:85/api/',
+  apiUrl: '/api/',
+  // userid 2, felipe
+  fixedToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiODE0ZDgzNzA3ZGI2N2U2MGMyZWIyMmJiZjIzM2JiOTAiLCJpYXQiOjE1NDE3NjMzNzd9.-LxoA5mk3n-h_FCB9KfANu2eDWgLso0fMORqZeVuYK8'
 };
 
 /*

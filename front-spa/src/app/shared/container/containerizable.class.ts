@@ -4,8 +4,11 @@ export class ContainerizableClass implements ContainerizableInterface{
 
   public items: Array<any>;
 
+  public amountTotal: number;
+
   constructor() {
     this.items = [];
+    this.amountTotal = 0;
   }
 
   private errorLog(info: { methodName }): void {
@@ -18,16 +21,9 @@ export class ContainerizableClass implements ContainerizableInterface{
     });
   }
 
-  sumValues(): number {
+  sumValues(): void {
     this.errorLog({
       methodName: 'sumValues'
     });
-    // let total = 0;
-    // for(let item of this.ReferenceObject){
-    //   total += item[this.sumPropertyName];
-    // }
-    //
-    // this.sum = parseFloat(total.toFixed(2));
-    return 0;
   }
 }
