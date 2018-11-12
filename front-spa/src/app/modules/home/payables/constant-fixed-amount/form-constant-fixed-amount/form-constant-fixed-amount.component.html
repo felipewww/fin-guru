@@ -1,0 +1,16 @@
+{{ form.valid }}
+{{ form.value | json }}
+<br>
+desc:
+{{ iptDescription.valid | json }}
+<br>
+
+<form #form="ngForm" class="guru-form" novalidate>
+    <div class="guru-form-input">
+        <label>Descrição</label>
+        <input name="description" #iptDescription="ngModel" ngModel required placeholder="Descrição aqui...">
+    </div>
+    <div class="guru-form-btn">
+        <button type="button" [disabled]="form.invalid">enviar</button>
+    </div>
+</form>

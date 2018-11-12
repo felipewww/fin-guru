@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ContentChild, AfterContentInit, ContentChildren, Directive, QueryList} from '@angular/core';
 
-import {ConstantFixedAmountComponent} from '../../pages/home/payables/constant-fixed-amount/constant-fixed-amount.component';
-import {ConstantVariableAmountComponent} from '../../pages/home/payables/constant-variable-amount/constant-variable-amount.component';
+import {ConstantFixedAmountComponent} from '../../modules/home/payables/constant-fixed-amount/constant-fixed-amount.component';
+import {ConstantVariableAmountComponent} from '../../modules/home/payables/constant-variable-amount/constant-variable-amount.component';
 import {ContainerizableClass} from './containerizable.class';
 
 @Component({

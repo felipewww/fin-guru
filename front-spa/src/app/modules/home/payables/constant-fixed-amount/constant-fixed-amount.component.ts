@@ -1,8 +1,8 @@
 import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {ContainerizableInterface} from '../../../../shared/container/containerizable.interface';
 import {ContainerizableClass} from '../../../../shared/container/containerizable.class';
-import {PayableFixedFixedAmountModel} from '../../../../models/payable-fixed-fixed-amount.model';
-import {ConstantFixedAmountService} from './constant-fixed-amount-service';
+import {PayablesFixedFixedAmountModel} from '../../../../services/payables-fixed/payables-fixed-fixed-amount.model';
+import {ConstantFixedAmountService} from '../../../../services/payables-fixed/constant-fixed-amount-service';
 
 @Component({
   selector: 'app-constant-fixed-amount',
@@ -12,7 +12,7 @@ import {ConstantFixedAmountService} from './constant-fixed-amount-service';
 @Injectable()
 export class ConstantFixedAmountComponent extends ContainerizableClass implements OnInit {
 
-  public items: Array<PayableFixedFixedAmountModel>;
+  public items: Array<PayablesFixedFixedAmountModel>;
 
   constructor(private constantFixedAmountService: ConstantFixedAmountService) {
     super();
@@ -20,12 +20,22 @@ export class ConstantFixedAmountComponent extends ContainerizableClass implement
 
   ngOnInit() {
 
+    // this.constantFixedAmountService.payables()
+    //   .subscribe((res) => {
+    //     console.log('resOBSERVABLE');
+    //     console.log(res);
+    //     this.items = res.result;
+    //     this.sumValues();
+    //   });
+
     this.constantFixedAmountService.payables()
-      .subscribe((res) => {
-        console.log('resOBSERVABLE');
-        console.log(res);
-        this.items = res.result;
+      .then(res => {
+        this.items = res;
         this.sumValues();
+      })
+      .catch(err => {
+        console.error('catch comp ERROR!');
+        console.error(err);
       });
   }
 
